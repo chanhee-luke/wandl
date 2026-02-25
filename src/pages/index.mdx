@@ -111,7 +111,7 @@ import frameCaptions from "../data/frame-captions.json";
 
 {/* **TL;DR** 1) A new training dataset and benchmark, **RoboSpatial** and **RoboSpatial-Home**, comprising images and 3D scans paired with spatial questions and answers, designed for robotics. 2) **RoboSpatial** trained model outperforms prior SOTA VLMs on natural language-specified robot manipulation tasks and indoor spatial scene question answering. */}
 
-**Watch and Learn (W&L) is a scalable framework that transforms everyday Internet videos of people using software into executable user interface action trajectories for training computer using agents.** Instead of relying on costly manual annotation or synthetic data that can produce oversimplified behaviors, W&L formulates trajectory extraction as an **inverse dynamics problem**, predicting user actions directly from consecutive screen states. This approach simplifies learning and generalizes across diverse and evolving applications. Through a task aware retrieval and labeling pipeline, the framework produces more than 53,000 high quality trajectories that can be used both as **supervised training data** and as **in-context examples**. Experiments on OSWorld and WindowsAgentArena show consistent improvements for both general purpose and specialized agents with supervised fine-tuning and in-context learning. Watch and Learn demonstrates that web scale human demonstration videos provide a practical and scalable foundation for advancing real world computer using agents.
+**Watch and Learn (W&L) is a scalable framework that transforms everyday Internet videos of people using software into executable user interface action trajectories for training computer-using agents.** Instead of relying on costly manual annotation or synthetic data that can produce oversimplified behaviors, W&L formulates trajectory extraction as an **inverse dynamics problem**, predicting user actions directly from consecutive screen states. This approach simplifies learning and generalizes across diverse and evolving applications. Through a task aware retrieval and labeling pipeline, the framework produces more than 53,000 high quality trajectories that can be used both as **supervised training data** and as **in-context examples**. Experiments on OSWorld and WindowsAgentArena show consistent improvements for both general purpose and specialized agents with supervised fine-tuning and in-context learning. Watch and Learn demonstrates that web scale human demonstration videos provide a practical and scalable foundation for advancing real world computer-using agents.
 
 </HighlightedSection>
 
@@ -173,22 +173,22 @@ Use the two columns component to display two columns of content. In this example
 ### Computer-Using Benchmarks
 
 <Figure
-    caption="Qualitative examples on OSWorld. On the left, the video-derived trajectory that \ourmethod{} generates for the task. On the right: (i) the o3 agent makes a grounding error by selecting a wrong UI element; (ii) the Jedi (o3) agent makes a planning error by entering the wrong submenu without recovering; (iii) using the video-derived trajectory, \ourmethod{} agent completes the task successfully. Images are cropped for visibility, and the action coordinates correspond to the original full-resolution screenshots. More trajectory examples are in the main paper."
+    caption="Qualitative examples on OSWorld. On the left, the video-derived trajectory that Watch & Learn generates for the task. On the right: (i) the o3 agent makes a grounding error by selecting a wrong UI element; (ii) the Jedi (o3) agent makes a planning error by entering the wrong submenu without recovering; (iii) using the video-derived trajectory, W&L agent completes the task successfully. Images are cropped for visibility, and the action coordinates correspond to the original full-resolution screenshots. More trajectory examples are in the main paper."
   >
     <Image source={fig3} altText="OSWorld results." />
 </Figure>
 
-#### WindowsAgentArena
+#### WindowsAgentArena (SFT)
 
 
-<Table caption="WindowsAgentArena results under the 15-step evaluation limit.">
+<Table caption="WindowsAgentArena SFT results under the 15-step evaluation limit.">
 | Model              | Setting / Training Data       | Success Rate (%) |
 |:-------------------|:------------------------------|:----------------:|
-| **UI-TARS-1.5-7B** | Zero-shot (no SFT)            | 18.1             |
+| UI-TARS-1.5-7B | Base (No SFT)           | 18.1             |
 |                    | SFT w/ TongUI                 | 12.9 (-5.2)      |
 |                    | **SFT w/ W&L (IDM-labeled)**  | **24.0 (+5.9)**  |
-| **OpenCUA-7B**     | Base                          | 13.5             |
-| **UltraCUA-7B**    | Base                          | 21.7             |
+| OpenCUA-7B     | Base (No SFT)                          | 13.5             |
+| UltraCUA-7B   | Base (No SFT)                          | 21.7             |
 </Table>
 
 #### OSWorld-Verified (ICL)
@@ -228,8 +228,8 @@ Use the two columns component to display two columns of content. In this example
 ```bibtex
 @inproceedings{song2026watchandlearn,
   author    = {Song, Chan Hee and Song, Yiwen and Goyal, Palash and Su, Yu and Riva, Oriana and Palangi, Hamid and Pfister, Tomas},
-  title     = {Watch and Learn: Learning to Use Computers from Online Videos},
-  booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
+  title     = {{Watch and Learn: Learning to Use Computers from Online Videos}},
+  booktitle = {{Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)}},
   year      = {2026},
   note      = {To appear},
 }

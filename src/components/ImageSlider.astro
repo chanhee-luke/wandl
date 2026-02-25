@@ -1,9 +1,10 @@
 ---
 interface Props {
   altText?: string;
+  captions?: string[];
 }
 
-const { altText = "Slider image" } = Astro.props;
+const { altText = "Slider image", captions = [] } = Astro.props;
 
 const glob = import.meta.glob("../assets/frames_labeled/frame_*.png", {
   eager: true,
@@ -70,13 +71,24 @@ const frameCount = frames.length;
       ))}
     </div>
   )}
+  {captions.length > 0 && (
+    <p
+      id="slider-caption"
+      class="slider-caption text-center text-base text-zinc-900 font-medium max-w-2xl mx-auto mt-2 mb-6 min-h-[1.5rem]"
+      aria-live="polite"
+    >
+      {captions[0]}
+    </p>
+  )}
 </div>
 
-<script is:inline define:vars={{ frameCount, frames }}>
+<script is:inline define:vars={{ frameCount, frames, captions }}>
   if (frameCount <= 1) return;
 
   const img = document.getElementById("slider-image");
+  const captionEl = document.getElementById("slider-caption");
   const dots = document.querySelectorAll(".slider-dot");
+  const hasCaptions = Array.isArray(captions) && captions.length > 0;
   const prevBtn = document.querySelector(".slider-prev");
   const nextBtn = document.querySelector(".slider-next");
 
@@ -87,6 +99,7 @@ const frameCount = frames.length;
   function goTo(i) {
     index = (i + frameCount) % frameCount;
     if (img) img.src = frames[index];
+    if (hasCaptions && captionEl && captions[index] !== undefined) captionEl.textContent = captions[index];
     dots.forEach((dot, i) => {
       dot.setAttribute("aria-selected", i === index);
       dot.classList.toggle("bg-zinc-400", i === index);

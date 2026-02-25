@@ -26,6 +26,7 @@ import teaser from "../assets/teaser.png";
 import fig1 from "../assets/figure1.jpg";
 import fig3 from "../assets/figure3.jpg";
 import ImageSlider from "../components/ImageSlider.astro";
+import frameCaptions from "../data/frame-captions.json";
 
 
 
@@ -137,13 +138,11 @@ Use the two columns component to display two columns of content. In this example
 </Figure>
 
 
-## Application Example
+## IDM Annotation Example
 
 
-<Figure
-    caption="An example of our IDM being used to annotate an online video."
-  >
-    <ImageSlider altText="An example of our IDM being used to annotate an online video." />
+<Figure>
+    <ImageSlider altText="An example of our IDM being used to annotate an online video." captions={frameCaptions} />
 </Figure>
 
 

@@ -1,0 +1,19 @@
+[
+  "Action 1: click (8, 45)",
+  "Action 2: move (34, 147)",
+  "Action 3: click (34, 147)",
+  "Action 4: click (75, 426)",
+  "Action 5: click (200, 594)",
+  "Action 6: click (585, 929)",
+  "Action 7: click (585, 929)",
+  "Action 8: wait",
+  "Action 9: move (467, 612)",
+  "Action 10: click (467, 612)",
+  "Action 11: click (121, 46)",
+  "Action 12: click (145, 426)",
+  "Action 13: click (459, 411)",
+  "Action 14: type (458, 412, '5000')",
+  "Action 15: type (454, 446, '7499')",
+  "Action 16: click (555, 647)",
+  "Action 17: No action (Done)"
+]

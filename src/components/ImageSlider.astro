@@ -1,0 +1,116 @@
+---
+interface Props {
+  altText?: string;
+}
+
+const { altText = "Slider image" } = Astro.props;
+
+const glob = import.meta.glob("../assets/frames_labeled/frame_*.png", {
+  eager: true,
+  query: "?url",
+  import: "default",
+});
+
+const sortedEntries = Object.entries(glob).sort(([pathA], [pathB]) => {
+  const numA = parseInt(pathA.match(/frame_(\d+)\.png/)?.[1] ?? "0", 10);
+  const numB = parseInt(pathB.match(/frame_(\d+)\.png/)?.[1] ?? "0", 10);
+  return numA - numB;
+});
+
+const frames = sortedEntries.map(([, value]) =>
+  typeof value === "string" ? value : (value as { default: string }).default
+);
+const frameCount = frames.length;
+---
+
+<div class="frames-slider w-full flex flex-col items-center gap-3 mb-6">
+  <div class="relative w-full flex justify-center">
+    <img
+      id="slider-image"
+      class="max-h-[35rem] w-max object-contain rounded-lg"
+      src={frames[0]}
+      alt={altText}
+      width={800}
+      height={600}
+    />
+    {frameCount > 1 && (
+      <>
+        <button
+          type="button"
+          class="slider-prev absolute left-0 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md transition hover:bg-white"
+          aria-label="Previous frame"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+        <button
+          type="button"
+          class="slider-next absolute right-0 top-1/2 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md transition hover:bg-white"
+          aria-label="Next frame"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </>
+    )}
+  </div>
+  {frameCount > 1 && (
+    <div class="slider-dots flex flex-wrap justify-center gap-1" role="tablist" aria-label="Frame navigation">
+      {frames.map((_, i) => (
+        <button
+          type="button"
+          class={`slider-dot h-2 w-2 rounded-full transition ${i === 0 ? "bg-zinc-400" : "bg-zinc-300"}`}
+          data-index={i}
+          aria-label={`Frame ${i + 1}`}
+          aria-selected={i === 0}
+          role="tab"
+        />
+      ))}
+    </div>
+  )}
+</div>
+
+<script is:inline define:vars={{ frameCount, frames }}>
+  if (frameCount <= 1) return;
+
+  const img = document.getElementById("slider-image");
+  const dots = document.querySelectorAll(".slider-dot");
+  const prevBtn = document.querySelector(".slider-prev");
+  const nextBtn = document.querySelector(".slider-next");
+
+  let index = 0;
+  let autoplayId = null;
+  const AUTOPLAY_MS = 1000;
+
+  function goTo(i) {
+    index = (i + frameCount) % frameCount;
+    if (img) img.src = frames[index];
+    dots.forEach((dot, i) => {
+      dot.setAttribute("aria-selected", i === index);
+      dot.classList.toggle("bg-zinc-400", i === index);
+      dot.classList.toggle("bg-zinc-300", i !== index);
+    });
+  }
+
+  function stopAutoplay() {
+    if (autoplayId != null) {
+      clearInterval(autoplayId);
+      autoplayId = null;
+    }
+  }
+
+  function onUserInteraction() {
+    stopAutoplay();
+  }
+
+  prevBtn?.addEventListener("click", () => { onUserInteraction(); goTo(index - 1); });
+  nextBtn?.addEventListener("click", () => { onUserInteraction(); goTo(index + 1); });
+  dots.forEach((dot) => {
+    dot.addEventListener("click", () => { onUserInteraction(); goTo(Number(dot.getAttribute("data-index"))); });
+  });
+
+  goTo(0);
+  autoplayId = setInterval(() => goTo(index + 1), AUTOPLAY_MS);
+</script>

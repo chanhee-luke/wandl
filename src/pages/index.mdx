@@ -1,7 +1,7 @@
 ---
 layout: ../layouts/Layout.astro
-title: "RoboSpatial: Teaching Spatial Understanding to 2D and 3D Vision-Language Models for Robotics"
-description: Webpage for RoboSpatial
+title: "Watch and Learn: Learning to Use Computers from Online Videos"
+description: Webpage for Watch and Learn
 favicon: favicon.ico
 # thumbnail: screenshot.png
 ---
@@ -9,7 +9,6 @@ favicon: favicon.ico
 import Layout from "../layouts/Layout.astro";
 
 import Header from "../components/Header.astro";
-import Video from "../components/Video.astro";
 import HighlightedSection from "../components/HighlightedSection.astro";
 import SmallCaps from "../components/SmallCaps.astro";
 import Figure from "../components/Figure.astro";
@@ -23,11 +22,10 @@ import Table from "../components/Table.astro";
 export const components = {pre: CodeBlock, table: Table}
 
 {/* Image imports */}
-import fig1 from "../assets/figure1.png";
-import fig2 from "../assets/figure2.png";
-import fig3 from "../assets/figure3.png";
-import robot_exp from "../assets/figure_robot.png";
-import demo_video from "../assets/demo_robospatial.mp4"
+import teaser from "../assets/teaser.png";
+import fig1 from "../assets/figure1.jpg";
+import fig3 from "../assets/figure3.jpg";
+import ImageSlider from "../components/ImageSlider.astro";
 
 
 
@@ -38,24 +36,16 @@ import demo_video from "../assets/demo_robospatial.mp4"
       name: "Chan Hee Song",
       url: "https://chanh.ee",
       institution: "The Ohio State University",
-      notes: ["*", "+"],
     },
     {
-      name: "Valts Blukis",
-      institution: "NVIDIA",
-      url: "https://research.nvidia.com/person/valts-blukis",
-      notes: [],
+      name: "Yiwen Song",
+      url: "https://research.google/people/yiwensong/?&type=google",
+      institution: "Google Cloud AI Research",
     },
     {
-      name: "Jonathan Tremblay",
-      institution: "NVIDIA",
-      url: "https://research.nvidia.com/person/jonathan-tremblay",
-      notes: [],
-    },
-    {
-      name: "Stephen Tyree",
-      institution: "NVIDIA",
-      url: "https://research.nvidia.com/person/stephen-tyree",
+      name: "Palash Goyal",
+      url: "https://research.google/people/276159/",
+      institution: "Google Cloud AI Research",
     },
     {
       name: "Yu Su",
@@ -63,48 +53,55 @@ import demo_video from "../assets/demo_robospatial.mp4"
       institution: "The Ohio State University",
     },
     {
-      name: "Stan Birchfield",
-      url: "https://sbirchfield.github.io/",
-      institution: "NVIDIA",
+      name: "Oriana Riva",
+      url: "https://research.google/people/orianariva/",
+      institution: "Google DeepMind",
+      notes: ["*"]
+    },
+    {
+      name: "Hamid Palangi",
+      url: "https://www.hamidpalangi.com",
+      institution: "Google Cloud AI Research",
+      notes: ["*"]
+    },
+    {
+      name: "Tomas Pfister",
+      url: "https://tomas.pfister.fi",
+      institution: "Google Cloud AI Research",
+      notes: ["*"]
     },
   ]}
-  conference="CVPR 2025 Oral (0.74%)"
+  conference="CVPR 2026"
   notes={[
     {
       symbol: "*",
-      text: "Work partly done during Nvidia internship",
+      text: "Joint last authors",
     },
     {
-      symbol: "+",
-      text: "Contact: song.1855@osu.edu",
+      symbol: "",
+      text: "Contact: chanhee.luke@gmail.com, {yiwensong, oriva, hamidpalangi}@google.com",
     },
   ]}
   links={[
     {
       name: "arXiv",
-      url: "https://arxiv.org/abs/2411.16537",
+      url: "https://arxiv.org/abs/2510.04673",
       icon: "fa-solid:file-pdf",
     },
     {
       name: "Code",
-      url: "https://github.com/NVlabs/RoboSpatial",
+      url: "",
       icon: "mdi:github",
-      disabled: false,
-    },
-    {
-      name: "Benchmark",
-      url: "https://huggingface.co/datasets/chanhee-luke/RoboSpatial-Home",
-      icon: "mdi:database",
-      disabled: false
+      disabled: true,
     },
   ]}
   />
 
 <div className="center-text">
-  **TL;DR** A large-scale 2D/3D dataset of real indoor/tabletop environments for spatial reasoning in robotics.
+  **TL;DR** A framework leverages inverse dynamics to convert internet videos of human computer use into executable UI trajectories, significantly improving computer-using agent performance.
 </div>
 
-<Video source={demo_video} />
+<Image source={teaser} altText="An overview of Watch and Learn." />
 
 
 <HighlightedSection>
@@ -113,11 +110,9 @@ import demo_video from "../assets/demo_robospatial.mp4"
 
 {/* **TL;DR** 1) A new training dataset and benchmark, **RoboSpatial** and **RoboSpatial-Home**, comprising images and 3D scans paired with spatial questions and answers, designed for robotics. 2) **RoboSpatial** trained model outperforms prior SOTA VLMs on natural language-specified robot manipulation tasks and indoor spatial scene question answering. */}
 
-Spatial understanding is essential for robots to perceive, reason about, and interact with their environments. However, current visual language models often rely on general-purpose image datasets that lack robust spatial scene understanding and reference frame comprehension (ego-, world-, or object-centric). To address this gap, we introduce **RoboSpatial**, a large-scale dataset of **real indoor and tabletop environments** captured via egocentric images and 3D scans. RoboSpatial provides **1M images, 5k 3D scans, and 3M annotated spatial relationships**, enabling both 2D and 3D spatial reasoning. Models trained on RoboSpatial outperform baselines on tasks including spatial affordance prediction, spatial relationship prediction, and robot manipulation.
+**Watch and Learn (W&L) is a scalable framework that transforms everyday Internet videos of people using software into executable user interface action trajectories for training computer using agents.** Instead of relying on costly manual annotation or synthetic data that can produce oversimplified behaviors, W&L formulates trajectory extraction as an **inverse dynamics problem**, predicting user actions directly from consecutive screen states. This approach simplifies learning and generalizes across diverse and evolving applications. Through a task aware retrieval and labeling pipeline, the framework produces more than 53,000 high quality trajectories that can be used both as **supervised training data** and as **in-context examples**. Experiments on OSWorld and WindowsAgentArena show consistent improvements for both general purpose and specialized agents with supervised fine-tuning and in-context learning. Watch and Learn demonstrates that web scale human demonstration videos provide a practical and scalable foundation for advancing real world computer using agents.
 
 </HighlightedSection>
-
-
 
 
 {/* ## Two columns
@@ -136,9 +131,9 @@ Use the two columns component to display two columns of content. In this example
 ## Approach
 
 <Figure
-    caption="We automatically generate spatial relationship annotations from existing datasets with 3D point clouds, egocentric images, and 3D bounding box annotations. We create question/answer pairs covering three classes of spatial relationships, three spatial reference frames, and both binary (yes/no) and numeric (e.g. 2D image points) answers. From 1M images and 5k 3D scans, we generate over 3M spatial question/answer pairs."
+    caption="Our framework converts web-scale human demonstration videos into executable trajectories for CUAs. We first collect a large-scale state-transition dataset of screen observations and user actions, and train an inverse dynamics model (IDM) to recover actions from consecutive screenshots. This IDM is then applied to tutorial videos to extract step-by-step trajectories. A retrieval module selects task-relevant or general demonstrations, which are used in two ways: (i) as in-context exemplars that provide application-specific knowledge at inference time, and (ii) as supervised training data to improve open-source CUAs."
   >
-    <Image source={fig2} altText="An overview of RoboSpatial Dataset." />
+    <Image source={fig1} altText="An overview of Watch and Learn." />
 </Figure>
 
 
@@ -146,71 +141,89 @@ Use the two columns component to display two columns of content. In this example
 
 
 <Figure
-    caption="An illustration of a model trained on RoboSpatial being used to solve a manipulation task using spatial reasoning."
+    caption="An example of our IDM being used to annotate an online video."
   >
-    <Image source={fig1} altText="An illustration of a model trained on RoboSpatial being used to solve a manipulation task using spatial reasoning." />
+    <ImageSlider altText="An example of our IDM being used to annotate an online video." />
 </Figure>
 
 
 ## Evaluation Results
 
-### Spatial QA
+### Inverse Dyanmics Model
 
-<Figure
+{/* <Figure
     caption="In-domain (RoboSpatial-Val, top) and out-of-domain (RoboSpatial-Home, BLINK, middle and bottom) results for RoboSpatial-trained models. Two models shown: SL (SpaceLLaVA) and RP (RoboPoint); the -FT suffix indicates fine-tuning on RoboSpatial. Correct answers in green. All images except bottom-right in the out-of-domain rows are from RoboSpatial-Home."
   >
     <Image source={fig3} altText="Qualitative Results of RoboSpatial-trained models." />
-</Figure>
+</Figure> */}
 
-<Table caption="Performance of RoboSpatial-trained models on four spatial reasoning benchmarks.">
-| Model                       | RoboSpatial-Val | RoboSpatial-Home | BLINK-Spatial | SpatialBench-Position |
-|:----------------------------|:---------------:|:-----------------:|:-------------:|:------------:|
-| **Open-source**             |                 |                  |               |              |
-| *--2D--*                    |                 |                  |               |              |
-| LLaVA-NeXT (8B)             | 30.3            | 46.3             | 71.8          |    55.9      |
-| + RoboSpatial               | 60.5            | 59.6             | **79.0**      |    **70.6**      |
-| RoboPoint (13B)             | 38.9            | 53.4             | 63.6          |    44.1      |
-| + RoboSpatial               | 70.6            | **63.4**         | 70.6          |    64.7      |
-| *--3D--*                    |                 |                  |               |              |
-| Embodied Generalist (7B)    | 42.8            | 29.8             | N/A           |    N/A       |
-| + RoboSpatial               | **71.9**        | 43.8             | N/A           |    N/A       |
-| **Baselines**               |                 |                  |               |              |
-| Molmo (7B)                  | 50.1            | 25.6             | 67.1          |    55.9      |
-| GPT-4o                      | 50.8            | 47.0             | 76.2          |    **70.6**      |
+<Table caption="Action type and overall accuracy of inverse dynamics models.">
+| ActionType      | Gemini 2.5 Flash | TongUI | Ours |
+|:----------------|:----------------:|:------:|:-------:|
+| click(x, y)     | 68%              | 72%    | **95%** |
+| release         | 71%              | 67%    | **90%** |
+| scroll(scroll_y)| 55%              | 75%    | **93%** |
+| type(text)      | 77%              | 71%    | **86%** |
+| wait(500ms)     | 92%              | 88%    | **97%** |
+| move(x, y)      | 65%              | 61%    | **89%** |
+| **ActionType Accuracy** | 81.5% | 84.3% | **95.8%** |
+| **Action Accuracy**     | 70.5% | 72.3% | **91.7%** |
 
 </Table>
 
-### Robot Manipulation
+### Computer-Using Benchmarks
 
 <Figure
-    caption="Robot experiments: the red dot shows the model output (if not present, the model failed to provide a valid point in the image);  green dots are used to show when a model outputs multiple points. The robot motion generator, cuRobo, is used to grasp the item referenced by the generated point. The spatial- prefix indicates model trained with RoboSpatial."
+    caption="Qualitative examples on OSWorld. On the left, the video-derived trajectory that \ourmethod{} generates for the task. On the right: (i) the o3 agent makes a grounding error by selecting a wrong UI element; (ii) the Jedi (o3) agent makes a planning error by entering the wrong submenu without recovering; (iii) using the video-derived trajectory, \ourmethod{} agent completes the task successfully. Images are cropped for visibility, and the action coordinates correspond to the original full-resolution screenshots. More trajectory examples are in the main paper."
   >
-    <Image source={robot_exp} altText="Robot experiment results." />
+    <Image source={fig3} altText="OSWorld results." />
 </Figure>
 
-<Table caption="Task success rate for robot manipulation.">
-| Model                        | Success Rate (%) |
-|:----------------------------|:---------------:|
-| **Open-source**              |                 |
-| LLaVA-NeXT (8B)              | 23.7           |
-| + RoboSpatial                | **52.6**    |
-| **Baselines** |            |
-| Molmo (7B)                  | 43.8           |
-| GPT-4o                   | 46.9           |
+<Table caption="WindowsAgentArena results under the 15-step evaluation limit.">
+| Model              | Setting / Training Data       | Success Rate (%) |
+|:-------------------|:------------------------------|:----------------:|
+| **UI-TARS-1.5-7B** | Zero-shot (no SFT)            | 18.1             |
+|                    | SFT w/ TongUI                 | 12.9 (-5.2)      |
+|                    | **SFT w/ W&L (IDM-labeled)**  | **24.0 (+5.9)**  |
+| **OpenCUA-7B**     | Base                          | 13.5             |
+| **UltraCUA-7B**    | Base                          | 21.7             |
 </Table>
 
-{/* | RoboPoint                 | 44.7           |
-| + RoboSpatial                | 46.2        | */}
+<Table caption="OSWorld-Verified in-context learning results under the 50-step evaluation limit.">
+| Category           | Base Model        | Method                        | Success Rate (%) |
+|:-------------------|:------------------|:------------------------------|:----------------:|
+| General Models     | Gemini 2.5 Flash  | Base (w/o video)              | 19.0             |
+|                    |                   | **SFT w/ W&L labeled videos** | **22.0 (+3.0)**  |
+|                    | OpenAI o3         | Base (w/o video)              | 21.8             |
+|                    |                   | SFT w/ TongUI labeled videos  | 21.1 (-0.7)      |
+|                    |                   | **SFT w/ W&L labeled videos** | **24.3 (+2.5)**  |
+|                    | Claude 4 Sonnet   | Base (w/o video)              | 43.9             |
+|                    |                   | SFT w/ TongUI labeled videos  | 43.4 (-0.5)      |
+|                    |                   | **SFT w/ W&L labeled videos** | **45.5 (+1.6)**  |
+| Agentic Framework  | Jedi              | Base (w/o video)              | 50.6             |
+|                    |                   | **SFT w/ W&L labeled videos** | **52.8 (+2.2)**  |
+</Table>
+
+<Table caption="OSWorld-Verified supervised fine-tuning results for open-source CUAs under the 50-step evaluation limit.">
+| Category           | Base Model      | Method                       | Success Rate (%) |
+|:-------------------|:----------------|:-----------------------------|:----------------:|
+| Open-Source Models | Qwen 2.5VL 7B   | Base (No SFT)                | 1.9              |
+|                    |                 | SFT w/ TongUI labeled        | 5.4 (+3.5)       |
+|                    |                 | **SFT w/ W&L (IDM labeled)** | **13.0 (+11.1)** |
+|                    | UI-TARS-1.5-7B  | Base (No SFT)                | 27.3             |
+|                    |                 | SFT w/ TongUI labeled        | 23.8 (-3.5)      |
+|                    |                 | **SFT w/ W&L (IDM labeled)** | **31.1 (+3.8)**  |
+</Table>
 
 
 ## BibTeX Citation
 
 ```bibtex
-@inproceedings{song2025robospatial,
-  author    = {Song, Chan Hee and Blukis, Valts and Tremblay, Jonathan and Tyree, Stephen and Su, Yu and Birchfield, Stan},
-  title     = {{RoboSpatial}: Teaching Spatial Understanding to {2D} and {3D} Vision-Language Models for Robotics},
+@inproceedings{song2026watchandlearn,
+  author    = {Song, Chan Hee and Song, Yiwen and Goyal, Palash and Su, Yu and Riva, Oriana and Palangi, Hamid and Pfister, Tomas},
+  title     = {Watch and Learn: Learning to Use Computers from Online Videos},
   booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-  year      = {2025},
+  year      = {2026},
   note      = {To appear},
 }
 ```
